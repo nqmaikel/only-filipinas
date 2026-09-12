@@ -1,3 +1,7 @@
+![Only Filipinas project cover](assets/showcase/cover.png)
+
+*Concept illustration created for this showcase.*
+
 <div align="center">
 
 <h1>Only Filipinas</h1>
@@ -24,11 +28,28 @@ Only Filipinas brings creator publishing, content access and audience interactio
 - Messaging with media attachments.
 - Moderation and administrative review tools.
 
+## Visual overview
+
+![Only Filipinas feature overview](assets/showcase/overview.png)
+
 ## High-level workflow
 
-Creators prepare and preview posts in the studio. Audience members explore content, use the library and interact through messaging. Administrative workflows support moderation and review across the platform.
+```mermaid
+flowchart LR
+    A["Creator studio"] --> B["Prepare and preview posts"]
+    B --> C["Publishing and content access"]
+    C --> D["Audience library"]
+    C --> E["Messaging"]
+    F["Moderation and review"] -.-> C
+    F -.-> E
 
-The prototype connects these experiences so that publishing, access management and communication can be evaluated together.
+    classDef stage fill:#f1f5f9,stroke:#64748b,color:#0f172a
+    classDef experience fill:#fce7f3,stroke:#db2777,color:#831843
+    class A,B,C,F stage
+    class D,E experience
+```
+
+The prototype connects publishing, access management and communication, with administrative workflows supporting moderation and review.
 
 ## Stack
 
@@ -40,6 +61,6 @@ Local prototype covering creator, subscriber and moderation workflows. Public la
 
 ## About this repository
 
-This repository is a public showcase. Application source code, media, account data and deployment files remain private; only this English project overview is published.
+This repository is a public showcase. Only presentation material is published; source code and private data remain private.
 
 **Last showcase review:** 2026-09-12 (Europe/Paris).
