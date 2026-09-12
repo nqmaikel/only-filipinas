@@ -87,39 +87,65 @@ protection and ledger entries that keep the fee separate from the creator's net 
 
 ## Application architecture
 
+### Product routes and application data
+
+Session and role checks protect the product flows: discovery, publishing, the library and
+messaging. Payment-mode checks and wallet accounting share the application store with those
+flows and with moderation and creator review.
+
 ```mermaid
 flowchart TB
-    B["Browser: Jinja2 pages, CSS and JavaScript"] --> A["FastAPI application and product routes"]
-    B --> W["PWA worker: public static assets and offline page"]
-
+    B["Browser interface"] --> A["FastAPI application"]
     A --> S["Session and role checks"]
-    S --> P["Discovery, publishing, library and messaging"]
-    S --> M["Per-file media authorization"]
-    S --> T["Payment-mode checks and wallet accounting"]
-    S --> R["Moderation and creator review"]
-
-    P --> D[("Relational application store")]
+    S --> P["Product flows"]
+    S --> T["Payment and wallet rules"]
+    S --> R["Moderation and review"]
+    P --> D[("Application store")]
     T --> D
     R --> D
-    M --> D
-    D --> L["SQLite for local use"]
-    D -.-> PG["PostgreSQL adapter and explicit migration"]
-
-    M --> F["Private local media storage"]
-    F --> I["Pillow resizing and paid-image watermarking"]
-    I --> B
-
-    S --> MEM["Local session storage"]
-    S -.-> REDIS["Optional shared Redis sessions"]
-    A --> E["Recovery and email-verification service"]
-    E -.-> SMTP["Configurable SMTP transport"]
+    D --> L["Local SQLite"]
+    D -.-> PG["PostgreSQL adapter"]
 ```
 
 The core is a FastAPI application that renders Jinja2 templates and exposes endpoints for
 interactive actions. The product routes share the same database and authorization helpers.
 SQLite is the local default; the PostgreSQL adapter and migrator support a separately configured
-deployment. Redis-backed sessions and SMTP delivery are optional integrations, not evidence of
-an operating public service.
+deployment.
+
+### Authorized media delivery
+
+Media checks consult the same application store to establish access to the exact requested file.
+Files remain in private local storage; authorized image delivery can resize them with Pillow and
+watermark paid images for the requesting account.
+
+```mermaid
+flowchart TB
+    Request["Browser media request"] --> Session["Session and role checks"]
+    Session --> Access["Per-file authorization"]
+    Access --> Data[("Application store")]
+    Access --> Files["Private media files"]
+    Files --> Images["Resize or watermark"]
+    Images --> Response["Authorized image response"]
+```
+
+### Sessions, email and offline support
+
+The server keeps sessions locally, with optional Redis storage for shared sessions. Recovery and
+email verification use a separately configured SMTP transport. The browser's PWA worker caches
+public static assets and an offline page; private media is excluded from that cache.
+
+```mermaid
+flowchart TB
+    App["FastAPI application"] --> Checks["Session checks"]
+    Checks --> Local["In-process sessions"]
+    Checks -.-> Redis["Optional Redis"]
+    App --> Recovery["Recovery and verification"]
+    Recovery -.-> SMTP["Configured SMTP"]
+    Browser["Browser"] --> Offline["Public asset cache and offline page"]
+```
+
+Redis-backed sessions and SMTP delivery are optional integrations, not evidence of an operating
+public service.
 
 ## Media and account boundaries
 
