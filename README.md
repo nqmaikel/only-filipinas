@@ -14,7 +14,15 @@ communicate with their audience; administrators have moderation and review workf
 ![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
 
+![Only Filipinas Explore screen with built-in demo profiles](assets/showcase/screenshot-explore-demo.jpg)
+
+*Actual Explore screen captured on 12 September 2026, using the application's built-in fictional creators and native initials placeholders.*
+
 </div>
+
+These screenshots show the unchanged application running in an isolated local environment with
+its built-in demo data. Creator profiles, subscriptions, post counts and balances are fictional
+examples. Original creator media was excluded; the captures do not represent user traction or revenue.
 
 ## Explore creators without losing the search context
 
@@ -35,6 +43,10 @@ The current subscription model grants access for a fixed period and does not ren
 Ending a subscription removes subscriber access immediately; separately purchased posts remain
 available. The interface explains those consequences before confirmation.
 
+![Only Filipinas subscription library in the demo account](assets/showcase/screenshot-library-demo.jpg)
+
+*Actual Library screen for a built-in fictional fan account. The subscription entries and access dates come from the demo seed; no subscription was purchased or cancelled for this capture.*
+
 ## Publishing and the creator studio
 
 The studio brings together profile setup, pricing, publishing, recent posts and links to the
@@ -45,6 +57,10 @@ creator's media vault, analytics, campaigns and live-studio preparation.
 - **Keep the draft on failure:** a failed upload or submission preserves the content that was being prepared.
 - **Make previews explicit:** captions remain public, including on locked posts; paid posts require media.
 - **Manage a media vault:** uploaded photos, videos and voice notes have a dedicated creator view.
+
+![Only Filipinas creator Studio with its test balance](assets/showcase/screenshot-studio-demo.jpg)
+
+*Actual Studio screen for a built-in fictional creator. The interface explicitly labels the amount “Available test balance”; the subscriber and post counts are demo records. No financial action or content publication was performed for the capture.*
 
 ## Messaging with attachment and voice previews
 
@@ -130,8 +146,11 @@ an operating public service.
 
 The latest recorded project review is dated **September 10, 2026** and describes a locally reviewed
 application. It records 106 passing tests and five PostgreSQL tests skipped because no test instance
-was configured. This showcase update inspects that implementation; it does not represent a fresh
-test run or a verified public launch.
+was configured. Those are recorded project results, not a fresh test-suite run for this showcase.
+
+For the screenshots, the actual interface was run in an isolated local environment with its built-in
+fictional seed data and external services disabled. The application source was copied unchanged,
+and original databases and creator media were excluded. This local review does not establish a public launch.
 
 Development payments are simulated. Real payment processing for the platform's adult-content
 model, recurring billing, external payout reconciliation, identity verification, email delivery
