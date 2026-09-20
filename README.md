@@ -187,4 +187,4 @@ and live streaming still require suitable connected services and operational val
 This repository is the public showcase of the application. Presentation material belongs here;
 source code, accounts, private media, databases and deployment configuration remain private.
 
-**Last showcase review:** 2026-09-12 (Europe/Paris).
+**Last showcase review:** 2026-09-20 (Europe/Paris).
